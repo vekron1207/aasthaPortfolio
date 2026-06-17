@@ -223,7 +223,7 @@ export default function ResumePage() {
             </a>
             <span className="text-[#E2DDD5]">|</span>
             <a
-              href="https://www.linkedin.com/in/aastha-sharma"
+              href="https://www.linkedin.com/in/aasthaofficial"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#C4A882] transition-colors print:no-underline"
