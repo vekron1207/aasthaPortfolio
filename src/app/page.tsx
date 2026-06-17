@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
+import DrawingDivider from "./components/DrawingDivider";
 import Publications from "./components/Publications";
 import Experience from "./components/Experience";
 import Gallery from "./components/Gallery";
@@ -14,6 +15,7 @@ export default function Home() {
       <main>
         <Hero />
         <About />
+        <DrawingDivider />
         <Publications />
         <Experience />
         <Gallery />

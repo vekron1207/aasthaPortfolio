@@ -7,17 +7,48 @@ import { motion, useScroll, useTransform } from "framer-motion";
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "22%"]);
 
   return (
-    <section ref={ref} className="relative h-screen min-h-[700px] overflow-hidden bg-cream flex">
-      {/* Left — text panel */}
+    <section ref={ref} className="relative h-screen min-h-[700px] overflow-hidden bg-cream">
+
+      {/* Full-width background image — no hard panel boundary */}
+      <motion.div
+        initial={{ opacity: 0, scale: 1.04 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+        className="absolute inset-0"
+      >
+        <motion.div style={{ y: imageY }} className="absolute inset-0 scale-105">
+          <Image
+            src="/images/hero.jpg"
+            alt="Aastha Sharma"
+            fill
+            priority
+            className="object-cover object-right-center"
+            sizes="100vw"
+          />
+        </motion.div>
+
+        {/* Multi-stop gradient: solid cream on left → feathers out → transparent on right */}
+        <div className="absolute inset-0 bg-gradient-to-r
+          from-cream from-[28%]
+          via-cream/80 via-[46%]
+          via-cream/40 via-[60%]
+          to-transparent to-[75%]
+          pointer-events-none"
+        />
+
+        {/* Mobile: heavier overlay so text is always readable */}
+        <div className="absolute inset-0 bg-cream/70 md:hidden pointer-events-none" />
+      </motion.div>
+
+      {/* Text — sits on top of the gradient */}
       <motion.div
         style={{ y: textY }}
-        className="relative z-10 flex flex-col justify-end pb-20 px-8 md:px-16 lg:px-24 w-full md:w-1/2 lg:w-[55%]"
+        className="relative z-10 h-full flex flex-col justify-end pb-20 px-8 md:px-16 lg:px-24 w-full md:w-[55%] lg:w-[52%]"
       >
-        {/* Eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -27,7 +58,6 @@ export default function Hero() {
           Editorial Assistant · Writer · Strategist
         </motion.p>
 
-        {/* Name */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -40,7 +70,6 @@ export default function Hero() {
           <em className="font-light italic">Sharma</em>
         </motion.h1>
 
-        {/* Divider */}
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
@@ -48,7 +77,6 @@ export default function Hero() {
           className="origin-left h-px w-16 bg-gold mb-6"
         />
 
-        {/* Tagline */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -59,7 +87,6 @@ export default function Hero() {
           strategic communication, and the power of the written word.
         </motion.p>
 
-        {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -68,19 +95,18 @@ export default function Hero() {
         >
           <button
             onClick={() => document.querySelector("#publications")?.scrollIntoView({ behavior: "smooth" })}
-            className="bg-ink text-cream text-sm tracking-wider uppercase px-7 py-3.5 hover:bg-gold hover:text-ink transition-all duration-400 font-sans"
+            className="bg-ink text-cream text-sm tracking-wider uppercase px-7 py-3.5 hover:bg-gold hover:text-ink transition-all duration-300 font-sans"
           >
             View Publications
           </button>
           <button
             onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-            className="border border-ink text-ink text-sm tracking-wider uppercase px-7 py-3.5 hover:border-gold hover:text-gold transition-all duration-400 font-sans"
+            className="border border-ink text-ink text-sm tracking-wider uppercase px-7 py-3.5 hover:border-gold hover:text-gold transition-all duration-300 font-sans"
           >
             Get in Touch
           </button>
         </motion.div>
 
-        {/* Stats row */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -99,30 +125,6 @@ export default function Hero() {
           ))}
         </motion.div>
       </motion.div>
-
-      {/* Right — image panel */}
-      <motion.div
-        initial={{ opacity: 0, scale: 1.05 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute right-0 top-0 h-full w-full md:w-1/2 lg:w-[45%] overflow-hidden"
-      >
-        <motion.div style={{ y: imageY }} className="absolute inset-0 scale-110">
-          <Image
-            src="/images/hero.jpg"
-            alt="Aastha Sharma"
-            fill
-            priority
-            className="object-cover object-center"
-            sizes="(max-width: 768px) 100vw, 45vw"
-          />
-        </motion.div>
-        {/* Gradient overlay on left edge to blend with text */}
-        <div className="absolute inset-0 bg-gradient-to-r from-cream via-cream/20 to-transparent pointer-events-none" />
-      </motion.div>
-
-      {/* Mobile image overlay gradient */}
-      <div className="absolute inset-0 bg-cream/60 md:hidden pointer-events-none" />
 
       {/* Scroll indicator */}
       <motion.div
