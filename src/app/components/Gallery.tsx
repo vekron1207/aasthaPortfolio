@@ -6,10 +6,16 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const photos = [
   {
+    src: "/images/hero.jpg",
+    alt: "Aastha Sharma",
+    caption: "Peacock Wall, New Delhi",
+    span: "row-span-2",
+  },
+  {
     src: "/images/gallery-ocean.jpg",
     alt: "Aastha at cliffside overlooking the ocean",
     caption: "Nusa Penida, Bali",
-    span: "row-span-2",
+    span: "",
   },
   {
     src: "/images/gallery-garden-path.jpg",

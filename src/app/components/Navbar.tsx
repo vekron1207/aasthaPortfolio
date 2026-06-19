@@ -5,11 +5,11 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 const links = [
-  { label: "About", href: "#about" },
+  { label: "About",        href: "#about" },
   { label: "Publications", href: "#publications" },
-  { label: "Experience", href: "#experience" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Contact", href: "#contact" },
+  { label: "Experience",   href: "#experience" },
+  { label: "Gallery",      href: "#gallery" },
+  { label: "Contact",      href: "#contact" },
 ];
 
 export default function Navbar() {
@@ -93,7 +93,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-cream/95 backdrop-blur-md flex flex-col items-center justify-center gap-8"
+            className="fixed inset-0 z-40 bg-cream/96 backdrop-blur-md flex flex-col items-center justify-center gap-8"
           >
             {links.map((link, i) => (
               <motion.button
@@ -107,11 +107,7 @@ export default function Navbar() {
                 {link.label}
               </motion.button>
             ))}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-            >
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
               <Link
                 href="/resume"
                 onClick={() => setMenuOpen(false)}

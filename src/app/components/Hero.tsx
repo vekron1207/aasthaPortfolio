@@ -7,139 +7,159 @@ import { motion, useScroll, useTransform } from "framer-motion";
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "22%"]);
+  const textY  = useTransform(scrollYProgress, [0, 1], ["0%", "16%"]);
+  const photoY = useTransform(scrollYProgress, [0, 1], ["0%",  "6%"]);
 
   return (
-    <section ref={ref} className="relative h-screen min-h-[700px] overflow-hidden bg-cream">
+    <section
+      ref={ref}
+      className="relative h-screen min-h-[700px] bg-cream overflow-hidden"
+    >
 
-      {/* Full-width background image — no hard panel boundary */}
-      <motion.div
-        initial={{ opacity: 0, scale: 1.04 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute inset-0"
-      >
-        <motion.div style={{ y: imageY }} className="absolute inset-0 scale-105">
+      {/* ── Photo panel — starts at 44% so section bg cream and gradient are identical ── */}
+      <div className="hidden md:block absolute inset-y-0 right-0 left-[44%]">
+        <motion.div style={{ y: photoY }} className="absolute inset-0">
           <Image
             src="/images/hero.jpg"
             alt="Aastha Sharma"
             fill
             priority
-            className="object-cover object-right-center"
-            sizes="100vw"
+            className="object-cover object-[center_85%]"
+            sizes="56vw"
           />
         </motion.div>
 
-        {/* Multi-stop gradient: solid cream on left → feathers out → transparent on right */}
-        <div className="absolute inset-0 bg-gradient-to-r
-          from-cream from-[28%]
-          via-cream/80 via-[46%]
-          via-cream/40 via-[60%]
-          to-transparent to-[75%]
-          pointer-events-none"
+        {/* Left fade — from full cream (matches section bg) to transparent, wide enough to fully dissolve edge */}
+        <div
+          className="absolute inset-y-0 left-0 z-10 pointer-events-none"
+          style={{ width: "55%", background: "linear-gradient(to right, #FAFAF7 0%, #FAFAF7 18%, rgba(250,250,247,0.7) 55%, transparent 100%)" }}
         />
+        {/* Top fade */}
+        <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-cream to-transparent z-10 pointer-events-none" />
+        {/* Bottom fade */}
+        <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-cream to-transparent z-10 pointer-events-none" />
+      </div>
 
-        {/* Mobile: heavier overlay so text is always readable */}
-        <div className="absolute inset-0 bg-cream/70 md:hidden pointer-events-none" />
-      </motion.div>
-
-      {/* Text — sits on top of the gradient */}
+      {/* ── Text — left half, always above photo ────────────────────── */}
       <motion.div
         style={{ y: textY }}
-        className="relative z-10 h-full flex flex-col justify-end pb-20 px-8 md:px-16 lg:px-24 w-full md:w-[55%] lg:w-[52%]"
+        className="relative z-20 h-full flex flex-col justify-end pb-20 px-8 md:px-16 lg:px-24 pt-16 md:max-w-[58%]"
       >
+        {/* Eyebrow */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="text-xs tracking-[0.3em] text-gold uppercase font-sans mb-6"
+          transition={{ delay: 0.45, duration: 0.7 }}
+          className="text-[10px] tracking-[0.42em] text-gold uppercase font-sans mb-7"
         >
-          Editorial Assistant · Writer · Strategist
+          Editor · Writer · Strategist
         </motion.p>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.55, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="font-serif font-light text-ink leading-[1.05] mb-6"
-          style={{ fontSize: "clamp(3rem, 6vw, 6rem)" }}
-        >
-          Aastha
-          <br />
-          <em className="font-light italic">Sharma</em>
-        </motion.h1>
+        {/* Name — curtain reveal */}
+        <div className="mb-8">
+          <div className="overflow-hidden leading-[0.9]">
+            <motion.h1
+              initial={{ y: "105%" }}
+              animate={{ y: 0 }}
+              transition={{ delay: 0.58, duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+              className="font-serif font-light text-ink"
+              style={{ fontSize: "clamp(3.8rem, 7.2vw, 7.5rem)", lineHeight: 0.92 }}
+            >
+              Aastha
+            </motion.h1>
+          </div>
+          <div className="overflow-hidden leading-[0.9]">
+            <motion.h1
+              initial={{ y: "105%" }}
+              animate={{ y: 0 }}
+              transition={{ delay: 0.72, duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+              className="font-serif italic font-light text-ink"
+              style={{ fontSize: "clamp(3.8rem, 7.2vw, 7.5rem)", lineHeight: 0.92 }}
+            >
+              Sharma
+            </motion.h1>
+          </div>
+        </div>
 
+        {/* Gold rule */}
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
-          className="origin-left h-px w-16 bg-gold mb-6"
+          transition={{ delay: 1.0, duration: 0.7, ease: "easeOut" }}
+          className="origin-left h-px w-12 bg-gold mb-7"
         />
 
+        {/* Tagline */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.8 }}
-          className="text-stone font-sans font-light text-base lg:text-lg leading-relaxed max-w-md mb-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.1, duration: 0.8 }}
+          className="text-stone font-sans font-light text-sm lg:text-base leading-relaxed max-w-sm mb-10"
         >
           Shaping ideas into impact — through editorial precision,
           strategic communication, and the power of the written word.
         </motion.p>
 
+        {/* CTAs */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.05, duration: 0.7 }}
-          className="flex flex-wrap gap-4"
+          transition={{ delay: 1.2, duration: 0.6 }}
+          className="flex flex-wrap gap-3 mb-14"
         >
           <button
             onClick={() => document.querySelector("#publications")?.scrollIntoView({ behavior: "smooth" })}
-            className="bg-ink text-cream text-sm tracking-wider uppercase px-7 py-3.5 hover:bg-gold hover:text-ink transition-all duration-300 font-sans"
+            className="bg-ink text-cream text-[11px] tracking-[0.2em] uppercase px-7 py-3.5 hover:bg-gold hover:text-ink transition-all duration-300 font-sans"
           >
             View Publications
           </button>
           <button
             onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-            className="border border-ink text-ink text-sm tracking-wider uppercase px-7 py-3.5 hover:border-gold hover:text-gold transition-all duration-300 font-sans"
+            className="border border-ink text-ink text-[11px] tracking-[0.2em] uppercase px-7 py-3.5 hover:border-gold hover:text-gold transition-all duration-300 font-sans"
           >
             Get in Touch
           </button>
         </motion.div>
 
+        {/* Stats */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.3, duration: 0.8 }}
-          className="flex gap-10 mt-14"
+          transition={{ delay: 1.38, duration: 0.7 }}
+          className="flex items-center gap-6"
         >
-          {[
-            { num: "30+", label: "Titles Published" },
-            { num: "5+", label: "Years Experience" },
-            { num: "2", label: "Research Papers" },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <p className="font-serif text-2xl text-ink font-light">{stat.num}</p>
-              <p className="text-xs text-stone-light tracking-wider uppercase font-sans mt-0.5">{stat.label}</p>
-            </div>
-          ))}
+          <div>
+            <p className="font-serif text-[1.6rem] text-ink font-light leading-none">30+</p>
+            <p className="text-[9px] text-stone/60 tracking-[0.22em] uppercase font-sans mt-1.5">Titles Published</p>
+          </div>
+          <div className="w-px h-8 bg-border flex-shrink-0" />
+          <div>
+            <p className="font-serif text-[1.6rem] text-ink font-light leading-none">5+</p>
+            <p className="text-[9px] text-stone/60 tracking-[0.22em] uppercase font-sans mt-1.5">Years Experience</p>
+          </div>
+          <div className="w-px h-8 bg-border flex-shrink-0" />
+          <div>
+            <p className="font-serif text-[1.6rem] text-ink font-light leading-none">2</p>
+            <p className="text-[9px] text-stone/60 tracking-[0.22em] uppercase font-sans mt-1.5">Research Papers</p>
+          </div>
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
+      {/* ── Scroll indicator ─────────────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.6, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
+        transition={{ delay: 1.7, duration: 0.8 }}
+        className="absolute bottom-8 left-8 md:left-16 lg:left-24 flex items-center gap-3 z-30"
       >
-        <span className="text-[10px] tracking-[0.3em] text-stone uppercase font-sans">Scroll</span>
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-px h-8 bg-gradient-to-b from-stone to-transparent"
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          className="w-px h-7 bg-gradient-to-b from-gold/50 to-transparent"
         />
+        <span className="text-[9px] tracking-[0.45em] text-stone/50 uppercase font-sans">Scroll</span>
       </motion.div>
+
     </section>
   );
 }

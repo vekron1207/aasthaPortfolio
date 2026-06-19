@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-type Category = "All" | "Literature" | "Mathematics" | "Environmental Studies" | "Music & Arts" | "Education";
+type Category = "All" | "Literature" | "Mathematics" | "Environmental Studies" | "Science" | "Arts & Aesthetics" | "Education" | "Worksheets" | "Writing";
 
 const books = [
   {
@@ -14,27 +14,27 @@ const books = [
     color: "#F5EEE4",
     accent: "#C4A882",
     description: "A curated anthology celebrating the diversity and depth of Indian women's literary voices across generations.",
-    pdf: "/books/Voices An Anthology of Indian Women Writers.pdf",
+    href: "/books/Voices An Anthology of Indian Women Writers.pdf",
   },
   {
     title: "Kriti — Grade 6",
-    subject: "Hindi Literature",
+    subject: "Arts and Aesthetics",
     level: "NCERT · Grade 6",
     category: "Literature" as Category,
     color: "#F5EEEE",
     accent: "#C48882",
-    description: "An NCERT Hindi literature textbook fostering language appreciation and creative expression.",
-    pdf: "/books/Kriti Grade 6.pdf",
+    description: "An NCERT Arts textbook fostering creativity and critical thinking.",
+    href: "/books/Kriti Grade 6.pdf",
   },
   {
     title: "Kriti — Grade 7",
-    subject: "Hindi Literature",
+    subject: "Arts and Aesthetics",
     level: "NCERT · Grade 7",
     category: "Literature" as Category,
     color: "#F5EEEE",
     accent: "#C48882",
-    description: "Building on Grade 6, this volume deepens students' engagement with Hindi literary traditions.",
-    pdf: "/books/Kriti Grade 7.pdf",
+    description: "Building on Grade 6, this volume deepens students' engagement with Arts and Aesthetics.",
+    href: "/books/Kriti Grade 7.pdf",
   },
   {
     title: "Ganita Prakash — Grade 6",
@@ -44,7 +44,7 @@ const books = [
     color: "#F0EEF5",
     accent: "#9882C4",
     description: "A foundational mathematics textbook designed to make learning numeracy engaging and intuitive.",
-    pdf: "/books/Ganita Prakash Grade 6.pdf",
+    href: "/books/Ganita Prakash Grade 6.pdf",
   },
   {
     title: "Ganita Prakash Part 1 — Grade 7",
@@ -54,7 +54,7 @@ const books = [
     color: "#F0EEF5",
     accent: "#9882C4",
     description: "Continues the Ganita Prakash series, building mathematical reasoning and problem-solving skills.",
-    pdf: "/books/Ganita Prakash Part 1 Grade 7.pdf",
+    href: "/books/Ganita Prakash Part 1 Grade 7.pdf",
   },
   {
     title: "Ganita Prakash Part 2 — Grade 7",
@@ -64,7 +64,7 @@ const books = [
     color: "#F0EEF5",
     accent: "#9882C4",
     description: "Second part of the Grade 7 mathematics series, advancing into more complex concepts.",
-    pdf: "/books/Ganita Prakash Part 2 Grade 7.pdf",
+    href: "/books/Ganita Prakash Part 2 Grade 7.pdf",
   },
   {
     title: "Ganita Prakash Part 2 — Grade 8",
@@ -74,7 +74,7 @@ const books = [
     color: "#F0EEF5",
     accent: "#9882C4",
     description: "Advanced secondary mathematics for Grade 8 learners, emphasising analytical thinking.",
-    pdf: "/books/Ganita Prakash Part 2 Grade 8.pdf",
+    href: "/books/Ganita Prakash Part 2 Grade 8.pdf",
   },
   {
     title: "Ganita Manjari Part 1 — Grade 9",
@@ -84,7 +84,7 @@ const books = [
     color: "#F0EEF5",
     accent: "#9882C4",
     description: "A rigorous secondary mathematics textbook preparing Grade 9 students for higher-level study.",
-    pdf: "/books/Ganita Manjari Part 1 Grade 9.pdf",
+    href: "/books/Ganita Manjari Part 1 Grade 9.pdf",
   },
   {
     title: "The World Around Us — Grade 4",
@@ -94,7 +94,7 @@ const books = [
     color: "#EEF2F5",
     accent: "#8AAFC4",
     description: "An NCERT textbook guiding young learners to understand and appreciate the world around them.",
-    pdf: "/books/The World Around Us Grade 4.pdf",
+    href: "/books/The World Around Us Grade 4.pdf",
   },
   {
     title: "The World Around Us — Grade 5",
@@ -104,7 +104,7 @@ const books = [
     color: "#EEF2F5",
     accent: "#8AAFC4",
     description: "Continuation of the acclaimed environmental studies series, deepening inquiry and exploration.",
-    pdf: "/books/The World Around Us Grade 5.pdf",
+    href: "/books/The World Around Us Grade 5.pdf",
   },
   {
     title: "The World Around Us — Grade 5 Bridge Course",
@@ -114,37 +114,37 @@ const books = [
     color: "#EEF2F5",
     accent: "#8AAFC4",
     description: "A bridge course companion supporting learners transitioning across grade levels in EVS.",
-    pdf: "/books/The World Around Us Grade 5 Bridge Course.pdf",
+    href: "/books/The World Around Us Grade 5 Bridge Course.pdf",
   },
   {
     title: "Exploration — Grade 9",
-    subject: "Environmental Studies",
+    subject: "Science",
     level: "NCERT · Grade 9",
-    category: "Environmental Studies" as Category,
+    category: "Science" as Category,
     color: "#EEF2F5",
     accent: "#8AAFC4",
     description: "An exploratory sciences and environment textbook encouraging curiosity and critical inquiry at Grade 9.",
-    pdf: "/books/Exploration Grade 9.pdf",
+    href: "/books/Exploration Grade 9.pdf",
   },
   {
     title: "Bansuri — Grade 5",
-    subject: "Music & Arts",
+    subject: "Arts & Aesthetics",
     level: "NCERT · Grade 5",
-    category: "Music & Arts" as Category,
+    category: "Arts & Aesthetics" as Category,
     color: "#F5F0EE",
     accent: "#C4A882",
     description: "An arts and music education text introducing students to the rich heritage of Indian classical music.",
-    pdf: "/books/Bansuri Grade 5.pdf",
+    href: "/books/Bansuri Grade 5.pdf",
   },
   {
     title: "Professional Development Package for Early Childhood Care and Education",
-    subject: "Education · Child Development",
+    subject: "Education · Teacher and Child Development",
     level: "Professional / Educators",
     category: "Education" as Category,
     color: "#EDF2EE",
     accent: "#8AAF92",
     description: "A comprehensive resource package for educators working in early childhood development and care settings.",
-    pdf: "/books/Professional Development Package for Early Childhood Care and Education.pdf",
+    href: "/books/Professional Development Package for Early Childhood Care and Education.pdf",
   },
   {
     title: "Udaan — Bridge Course",
@@ -154,19 +154,95 @@ const books = [
     color: "#EDF2EE",
     accent: "#8AAF92",
     description: "A bridge learning programme designed to bring learners up to grade level through structured support.",
-    pdf: "/books/Udaan Bridge Course.pdf",
+    href: "/books/Udaan Bridge Course.pdf",
+  },
+  // ── Language Pedagogy ───────────────────────────────────────────────────────
+  {
+    title: "Language Pedagogy: English — Vol. I",
+    subject: "Education · Language Teaching",
+    level: "Teacher Education",
+    category: "Education" as Category,
+    color: "#EDF2EE",
+    accent: "#8AAF92",
+    description: "A teacher-education resource exploring foundational approaches to English language pedagogy in Indian classrooms.",
+    href: "/books/Language Pedagogy English Vol I.pdf",
+  },
+  {
+    title: "Language Pedagogy: English — Vol. II",
+    subject: "Education · Language Teaching",
+    level: "Teacher Education",
+    category: "Education" as Category,
+    color: "#EDF2EE",
+    accent: "#8AAF92",
+    description: "The second volume extending theoretical and practical frameworks for English language teaching in diverse school contexts.",
+    href: "/books/Language Pedagogy English Vol II.pdf",
+  },
+  // ── English Worksheets ──────────────────────────────────────────────────────
+  {
+    title: "English Worksheets — Grade 6",
+    subject: "Worksheets · English",
+    level: "NCERT · Grade 6",
+    category: "Worksheets" as Category,
+    color: "#EEF5F0",
+    accent: "#7AAF8A",
+    description: "Supplementary English language worksheets for Grade 6, supporting comprehension, grammar, and creative writing skills.",
+    href: "/books/English Worksheets Grade 6.pdf",
+  },
+  {
+    title: "English Worksheets — Grade 7",
+    subject: "Worksheets · English",
+    level: "NCERT · Grade 7",
+    category: "Worksheets" as Category,
+    color: "#EEF5F0",
+    accent: "#7AAF8A",
+    description: "Grade 7 supplementary English worksheets covering vocabulary development, reading comprehension, and writing practice.",
+    href: "/books/English Worksheets Grade 7.pdf",
+  },
+  {
+    title: "English Worksheets — Grade 8",
+    subject: "Worksheets · English",
+    level: "NCERT · Grade 8",
+    category: "Worksheets" as Category,
+    color: "#EEF5F0",
+    accent: "#7AAF8A",
+    description: "Advanced Grade 8 English practice worksheets fostering critical reading and structured essay writing abilities.",
+    href: "/books/English Worksheets Grade 8.pdf",
+  },
+  // ── Writing / Articles ──────────────────────────────────────────────────────
+  {
+    title: "Bali Travelogue",
+    subject: "Writing · Travel",
+    level: "Personal Essay",
+    category: "Writing" as Category,
+    color: "#F0F4F8",
+    accent: "#7A9CBF",
+    description: "A personal travelogue capturing the landscapes, culture, and quiet revelations of Bali — written with literary sensibility.",
+    href: "/books/Bali Travelogue.pdf",
+  },
+  {
+    title: "Construction Industry Forecast in 2022",
+    subject: "Writing · Industry Analysis",
+    level: "Published Article",
+    category: "Writing" as Category,
+    color: "#F0F4F8",
+    accent: "#7A9CBF",
+    description: "A commissioned analytical piece examining key trends, challenges, and growth projections in the construction industry for 2022.",
+    href: "https://trexfencingfds.com/construction-industry-forecast-in-2022/",
   },
 ];
 
-const categories: Category[] = ["All", "Literature", "Mathematics", "Environmental Studies", "Music & Arts", "Education"];
+const categories: Category[] = ["All", "Literature", "Mathematics", "Environmental Studies", "Science", "Arts & Aesthetics", "Education", "Worksheets", "Writing"];
 
 const categoryCounts: Record<Category, number> = {
   All: books.length,
   Literature: books.filter((b) => b.category === "Literature").length,
   Mathematics: books.filter((b) => b.category === "Mathematics").length,
   "Environmental Studies": books.filter((b) => b.category === "Environmental Studies").length,
-  "Music & Arts": books.filter((b) => b.category === "Music & Arts").length,
+  Science: books.filter((b) => b.category === "Science").length,
+  "Arts & Aesthetics": books.filter((b) => b.category === "Arts & Aesthetics").length,
   Education: books.filter((b) => b.category === "Education").length,
+  Worksheets: books.filter((b) => b.category === "Worksheets").length,
+  Writing: books.filter((b) => b.category === "Writing").length,
 };
 
 export default function Publications() {
@@ -205,7 +281,7 @@ export default function Publications() {
             transition={{ delay: 0.2 }}
             className="text-stone font-sans text-sm leading-relaxed max-w-sm lg:text-right"
           >
-            {books.length} titles edited, published, and administered at NCERT — from concept to release.
+            {books.length} works — books, worksheets, articles, and essays spanning education, literature, and beyond.
           </motion.p>
         </div>
 
@@ -243,7 +319,7 @@ export default function Publications() {
             {filtered.map((book) => (
               <motion.a
                 key={book.title}
-                href={book.pdf}
+                href={book.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 layout
@@ -282,7 +358,9 @@ export default function Publications() {
                     >
                       {book.title}
                     </p>
-                    <p className="text-[10px] tracking-widest uppercase mt-2 font-sans font-medium text-stone">NCERT</p>
+                    <p className="text-[10px] tracking-widest uppercase mt-2 font-sans font-medium text-stone">
+                      {book.href.startsWith("http") ? "Article" : book.category === "Worksheets" ? "Worksheet" : "NCERT"}
+                    </p>
                   </div>
                 </div>
 
@@ -303,7 +381,7 @@ export default function Publications() {
                   <div className="flex items-center justify-between mt-auto pt-2 border-t border-border">
                     <span className="text-xs text-stone font-sans font-medium">{book.level}</span>
                     <span className="text-xs text-gold font-sans font-semibold tracking-wider group-hover:underline">
-                      View ↗
+                      {book.href.startsWith("http") ? "Read ↗" : "View ↗"}
                     </span>
                   </div>
                 </div>
@@ -320,7 +398,7 @@ export default function Publications() {
           transition={{ delay: 0.3 }}
           className="text-center text-sm text-stone font-sans mt-10 tracking-wider"
         >
-          All titles published by the National Council of Educational Research and Training (NCERT), New Delhi
+          Primary titles published by the National Council of Educational Research and Training (NCERT), New Delhi
         </motion.p>
       </div>
     </section>
